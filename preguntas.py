@@ -209,7 +209,8 @@ def pregunta_10():
    
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl01=tbl0.groupby("_c1")["_c2"].agg(lambda x: sorted(list(x))).astype(str)
-    tbl01.str.replace(", ",":", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False).reset_index()
+    tbl02=tbl01.str.replace(", ",":", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False).reset_index()
+    tbl02
 
     
     return
