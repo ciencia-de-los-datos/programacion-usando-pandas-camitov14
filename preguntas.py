@@ -86,9 +86,8 @@ def pregunta_04():
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl0.set_index("_c1", inplace=True)
     contador=tbl0["_c2"].groupby("_c1").mean()
-    contador
-
-    return
+    
+    return contador
 
 
 def pregunta_05():
