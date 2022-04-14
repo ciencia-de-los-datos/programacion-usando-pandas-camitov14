@@ -65,7 +65,6 @@ def pregunta_03():
     import pandas as pd
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     contador=tbl0["_c1"].value_counts().sort_index()
-    contador
 
     return contador
 
@@ -85,8 +84,8 @@ def pregunta_04():
     import pandas as pd
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl0.set_index("_c1", inplace=True)
-    contador=tbl0["_c2"].groupby("_c1").mean()
-    
+    contador=tbl0.groupby("_c1")["_c2"].mean()
+
     return contador
 
 
@@ -104,7 +103,11 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    import pandas as pd
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl0.set_index("_c1", inplace=True)
+    maximo=tbl0.groupby("_c1")["_c2"].max()
+    return maximo
 
 
 def pregunta_06():
@@ -116,7 +119,10 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+    import pandas as pd
+    tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
+    unicos=list(tbl1["_c4"].str.upper().sort_values().unique())
+    return unicos
 
 
 def pregunta_07():
@@ -132,7 +138,11 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+    import pandas as pd
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl0.set_index("_c1", inplace=True)
+    suma=tbl0.groupby("_c1")["_c2"].sum()
+    return suma
 
 
 def pregunta_08():
@@ -150,7 +160,11 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    import pandas as pd
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl0["suma"]=tbl0[["_c0","_c2"]].sum(axis=1)
+
+    return tbl0
 
 
 def pregunta_09():
@@ -168,7 +182,13 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    
+    import pandas as pd
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl0["year"]=tbl0["_c3"].str.split("-", expand=True)[0]
+    tbl0
+  
+    return tbl0
 
 
 def pregunta_10():
@@ -185,6 +205,13 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+    import pandas as pd
+   
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl01=tbl0.groupby("_c1")["_c2"].agg(lambda x: sorted(list(x))).astype(str)
+    tbl01.str.replace(", ",":", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False).reset_index()
+
+    
     return
 
 
