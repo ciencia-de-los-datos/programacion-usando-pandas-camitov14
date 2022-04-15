@@ -234,7 +234,7 @@ def pregunta_11():
      
     tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
     tbl01=tbl1.groupby("_c0")["_c4"].agg(lambda x: sorted(list(x))).astype(str)
-    tbl01=tbl01.str.replace(" ","", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False)
+    tbl01=tbl01.str.replace("[","", regex=False).str.replace("]","", regex=False).str.replace(", ",",", regex=False).str.replace("'","", regex=False)
     tbl01=tbl01.reset_index()
     
     return tbl01
@@ -260,7 +260,7 @@ def pregunta_12():
     tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
     tbl2["_c5"]=tbl2["_c5a"].astype(str)+":"+tbl2["_c5b"].astype(str)
     tbl2=tbl2.groupby("_c0")["_c5"].agg(lambda x: sorted(list(x))).astype(str)
-    tbl2=tbl2.str.replace(" ","", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False)
+    tbl2=tbl2.str.replace(" ","", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False).str.replace("'","", regex=False)
     tbl2=tbl2.reset_index()
     
     return tbl2
