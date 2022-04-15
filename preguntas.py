@@ -210,9 +210,8 @@ def pregunta_10():
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl01=tbl0.groupby("_c1")["_c2"].agg(lambda x: sorted(list(x))).astype(str)
     tbl01=tbl01.str.replace(", ",":", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False)
-    tbl01=tbl01.reset_index("_c1")
-    tbl01=tbl01.set_index("_c1")
-   
+    tbl01=pd.DataFrame(tbl01, columns=["_c2"])
+    
     return tbl01
      
 def pregunta_11():
@@ -231,7 +230,14 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    import pandas as pd
+     
+    tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
+    tbl01=tbl1.groupby("_c0")["_c4"].agg(lambda x: sorted(list(x))).astype(str)
+    tbl01=tbl01.str.replace(" ","", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False)
+    tbl01=tbl01.reset_index()
+    
+    return tbl01
 
 
 def pregunta_12():
@@ -249,7 +255,15 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    import pandas as pd
+     
+    tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
+    tbl2["_c5"]=tbl2["_c5a"].astype(str)+":"+tbl2["_c5b"].astype(str)
+    tbl2=tbl2.groupby("_c0")["_c5"].agg(lambda x: sorted(list(x))).astype(str)
+    tbl2=tbl2.str.replace(" ","", regex=False).str.replace("[","", regex=False).str.replace("]","", regex=False)
+    tbl2=tbl2.reset_index()
+    
+    return tbl2
 
 
 def pregunta_13():
