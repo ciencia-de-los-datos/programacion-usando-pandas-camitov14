@@ -280,4 +280,14 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    import pandas as pd
+     
+    tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
+    tbl2=tbl2.groupby("_c0")["_c5b"].sum()
+    tbl2=pd.DataFrame(tbl2,columns=["_c5b"])
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+    tbl0.set_index(["_c0"])
+    tbl_total=pd.concat([tbl0,tbl2], axis=1)
+    tbl_total=tbl_total.groupby("_c1")["_c5b"].sum()
+
+    return tbl_total
